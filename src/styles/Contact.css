@@ -1,0 +1,139 @@
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: max-content;
+}
+.chatBox {
+  margin-bottom: 5px;
+  display: flex;
+}
+.chatBoxWrapper {
+  display: flex;
+  flex-direction: column;
+  max-height: 450px;
+  overflow-y: hidden;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 3px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.chatMessage {
+  display: flex;
+}
+.chatBoxTop {
+  flex: 1;
+  overflow-y: auto;
+  /* width: 490px; */
+  width: 400px;
+}
+.chatBoxTop::-webkit-scrollbar {
+  width: 5px; /* Lățimea scrollbar-ului pentru browser-ele bazate pe WebKit */
+}
+
+.chatBoxTop::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Culoarea fundalului scrollbar-ului */
+}
+
+.chatBoxTop::-webkit-scrollbar-thumb {
+  background-color: #888; /* Culoarea thumb-ului scrollbar-ului */
+  border-radius: 10px; /* Raza de colț pentru thumb */
+}
+
+.chatBoxTop::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Culoarea thumb-ului la hover */
+}
+.sentMessage,
+.receivedMessage {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 5px;
+  max-width: 50%;
+  word-wrap: break-word;
+}
+
+.sentMessage {
+  margin-left: auto;
+  background-color: #e1ffc7;
+  text-align: right;
+}
+.sentMessage .copyButton {
+  display: none;
+}
+
+.receivedMessage {
+  background-color: #f0f0f0;
+  text-align: left;
+}
+.messageContent {
+  text-align: left;
+}
+.userInfo {
+  position: relative;
+}
+.receivedMessage .userInfo .copyButton {
+  background-image: url("../assets/copy.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 15px;
+  height: 15px;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.receivedMessage:hover .userInfo .copyButton {
+  opacity: 1; /* Face butonul vizibil la hover peste userInfo */
+}
+
+.copyButton:hover {
+  opacity: 0.8; /* Efect de hover */
+}
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 400px;
+}
+.contactForm textarea {
+  resize: none;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  min-height: 60px;
+}
+.contactForm button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  align-self: flex-end;
+}
+.contactForm button:hover {
+  background-color: #0056b3;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+.required {
+  color: red;
+}
+.dateOn {
+  font-size: x-small;
+  align-items: flex-end;
+}

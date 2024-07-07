@@ -1,0 +1,89 @@
+.sentMessage {
+  background-color: #cce6ff;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+}
+
+.receivedMessage {
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+}
+
+.userInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyButton {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 0.8em;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.dateOn {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.messageContent {
+  margin-top: 5px;
+}
+
+.optionsButton {
+  font-size: 1.2em;
+  margin-right: 10px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.optionsMenu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.optionButton {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.optionButton:hover {
+  background-color: #f0f0f0;
+}
+
+.reactions {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.reactions span {
+  font-size: 1.2em;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.deleteButton {
+  color: #f44336;
+}
+
+.reactionButton {
+  color: #007bff;
+}
