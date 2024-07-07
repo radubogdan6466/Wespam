@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import { ConnectWallet } from "../components/WebUtils";
 import Message from "../components/Messages"; // Importă componenta Message
@@ -18,7 +18,7 @@ function Contact() {
   const [contacts, setContacts] = useState([]);
   const scrollRef = useRef();
 
-  const [rooms, setRooms] = useState({
+  const [rooms] = useState({
     general: "",
     room1: 1,
     room2: 2,
@@ -43,12 +43,12 @@ function Contact() {
     }, "");
   };
 
-  const joinRoom = (roomNumber) => {
+  const joinRoom = useCallback((roomNumber) => {
     socket.emit("join_room", roomNumber);
     setContacts([]);
     setSelectedRoom(roomNumber);
     setCookie("selectedRoom", roomNumber, 7); // Setează cookie-ul pentru room-ul selectat
-  };
+  }, []);
 
   const fetchContacts = async () => {
     try {
@@ -104,7 +104,7 @@ function Contact() {
       socket.off("newMessage");
       socket.off("messageDeleted");
     };
-  }, [selectedRoom]);
+  }, [joinRoom, selectedRoom]);
 
   const axiosPostData = async () => {
     const sanitizedMessage = DOMPurify.sanitize(message);
