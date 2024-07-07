@@ -14,13 +14,12 @@
 
 .userInfo {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: relative;
 }
 
 .copyButton {
-  background-color: #4caf50;
-  color: white;
   border: none;
   padding: 5px 10px;
   font-size: 0.8em;

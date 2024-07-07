@@ -27,9 +27,6 @@ const Message = ({ contact, user, room, handleCopyUser, scrollRef }) => {
           onClick={() => handleCopyUser(contact.user)}
         />
         <br />
-        <em className="dateOn">
-          {format(new Date(contact.entryDate), "dd MMMM yyyy, HH:mm")}
-        </em>
       </div>
       <div className="messageContent">{contact.message}</div>
       {contact.user !== user && (
@@ -38,6 +35,9 @@ const Message = ({ contact, user, room, handleCopyUser, scrollRef }) => {
           onMouseEnter={() => console.log("Hovered")}
         ></div>
       )}
+      <em className="dateOn">
+        {format(new Date(contact.entryDate), "dd MMMM yyyy, HH:mm")}
+      </em>
     </div>
   );
 };

@@ -70,9 +70,7 @@
 .messageContent {
   text-align: left;
 }
-.userInfo {
-  position: relative;
-}
+
 .receivedMessage .userInfo .copyButton {
   background-image: url("../assets/copy.png");
   background-size: contain;

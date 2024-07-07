@@ -7,8 +7,9 @@ import socketIOClient from "socket.io-client";
 import DOMPurify from "dompurify";
 import { validateMessage } from "../components/validationUtils"; // Importăm funcția de validare
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = process.env.REACT_APP_ENDPOINT;
 const socket = socketIOClient(ENDPOINT);
+console.log(ENDPOINT);
 
 function Contact() {
   const [message, setMessage] = useState("");
@@ -18,6 +19,7 @@ function Contact() {
   const scrollRef = useRef();
 
   const [rooms, setRooms] = useState({
+    general: "",
     room1: 1,
     room2: 2,
     room3: 3,
@@ -25,15 +27,32 @@ function Contact() {
 
   const [selectedRoom, setSelectedRoom] = useState("");
 
+  // Funcție pentru setarea unui cookie
+  const setCookie = (name, value, days) => {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${encodeURIComponent(
+      value
+    )}; expires=${expires}; path=/`;
+  };
+
+  // Funcție pentru preluarea unui cookie
+  const getCookie = (name) => {
+    return document.cookie.split("; ").reduce((r, v) => {
+      const parts = v.split("=");
+      return parts[0] === name ? decodeURIComponent(parts[1]) : r;
+    }, "");
+  };
+
   const joinRoom = (roomNumber) => {
     socket.emit("join_room", roomNumber);
     setContacts([]);
     setSelectedRoom(roomNumber);
+    setCookie("selectedRoom", roomNumber, 7); // Setează cookie-ul pentru room-ul selectat
   };
 
   const fetchContacts = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/contacts");
+      const response = await axios.get(`${ENDPOINT}/contacts`);
       setContacts(response.data);
     } catch (error) {
       console.error("Error fetching contacts:", error);
@@ -49,6 +68,13 @@ function Contact() {
         console.error("Failed to connect wallet:", error.message);
       }
     };
+
+    // Preluarea room-ului din cookie la încărcarea componentului
+    const savedRoom = getCookie("selectedRoom");
+    if (savedRoom) {
+      setSelectedRoom(savedRoom);
+      joinRoom(savedRoom);
+    }
 
     fetchUser();
     fetchContacts();
@@ -90,7 +116,7 @@ function Contact() {
     }
 
     try {
-      const res = await axios.post("http://localhost:4000/contact/send", {
+      const res = await axios.post(`${ENDPOINT}/contact/send`, {
         user,
         message: sanitizedMessage,
         room: selectedRoom,
@@ -133,9 +159,7 @@ function Contact() {
 
   const handleDeleteMessage = async (messageId) => {
     try {
-      const res = await axios.delete(
-        `http://localhost:4000/contact/${messageId}`
-      );
+      const res = await axios.delete(`${ENDPOINT}/contact/${messageId}`);
       console.log("Message deleted:", res.data);
       fetchContacts(); // Reîncarcă mesajele după ștergere
     } catch (err) {
